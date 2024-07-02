@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CoffeeShopCompose</string>
+    <string name="title_activity_introduce_page">IntroducePage</string>
+    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="home">Home</string>
+    <string name="orders">Orders</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+</resources>
