@@ -22,6 +22,7 @@ class MainActivity : ComponentActivity() {
             CoffeeShopComposeTheme {
                 intent = Intent(this, IntroducePage::class.java)
                 startActivity(intent)
+                finish()
             }
         }
     }

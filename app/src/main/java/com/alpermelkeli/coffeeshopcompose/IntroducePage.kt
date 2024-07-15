@@ -7,14 +7,11 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,23 +23,34 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.alpermelkeli.coffeeshopcompose.components.NextButton
 import com.alpermelkeli.coffeeshopcompose.ui.theme.CoffeeShopComposeTheme
 import com.alpermelkeli.coffeeshopcompose.ui.theme.White50
 import com.alpermelkeli.coffeeshopcompose.ui.theme.soraFontFamily
+import com.alpermelkeli.coffeeshopcompose.viewmodel.UserViewModel
 
 class IntroducePage : ComponentActivity() {
+    private val userViewModel = UserViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
+
+        if(userViewModel.isLogged()){
+            intent = Intent(this, HomeScreen::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         setContent {
             CoffeeShopComposeTheme {
                 IntroducePageScreen{
-                    intent  = Intent(this,HomeScreen::class.java)
+                    intent  = Intent(this,LoginRegister::class.java)
                     startActivity(intent)
+                    finish()
                 }
             }
         }
@@ -94,7 +102,9 @@ fun IntroducePageScreen(onNext:()->Unit) {
                 .fillMaxWidth(0.8f)
                 .height(60.dp)
                 .align(Alignment.CenterHorizontally),
-            text = "Get Started")
+            text = "Get Started",
+            enabled = true
+            )
 
         Spacer(modifier = Modifier.height(15.dp))
     }

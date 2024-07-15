@@ -23,14 +23,15 @@ import com.alpermelkeli.coffeeshopcompose.ui.theme.Brown80
 import com.alpermelkeli.coffeeshopcompose.ui.theme.soraFontFamily
 
 @Composable
-fun NextButton(onClick:() -> Unit, modifier: Modifier, text:String) {
+fun NextButton(onClick:() -> Unit, modifier: Modifier, text:String, enabled:Boolean) {
     Button(onClick = onClick,
         modifier = modifier,
         colors = ButtonColors(containerColor = Brown80,
             contentColor = Color.White,
             disabledContentColor = Brown80,
             disabledContainerColor = Color.White),
-        shape = ShapeDefaults.Medium
+        shape = ShapeDefaults.Medium,
+        enabled = enabled
     )
     {
         Text(text = text,
@@ -51,7 +52,7 @@ fun ButtonPreview(){
             Modifier
                 .fillMaxWidth(0.8f)
                 .height(50.dp),
-            "Get Started"
+            "Get Started",true
             )
     }
 }

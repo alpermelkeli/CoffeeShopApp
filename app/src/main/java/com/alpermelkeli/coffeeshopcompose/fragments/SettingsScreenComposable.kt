@@ -1,4 +1,4 @@
-package com.alpermelkeli.coffeeshopcompose.components.fragments
+package com.alpermelkeli.coffeeshopcompose.fragments
 
 import androidx.compose.runtime.Composable
 

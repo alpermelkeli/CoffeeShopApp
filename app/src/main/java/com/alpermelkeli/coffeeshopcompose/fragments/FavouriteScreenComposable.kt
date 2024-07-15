@@ -1,4 +1,4 @@
-package com.alpermelkeli.coffeeshopcompose.components.fragments
+package com.alpermelkeli.coffeeshopcompose.fragments
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

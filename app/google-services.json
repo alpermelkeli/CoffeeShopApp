@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "235949472302",
+    "project_id": "coffeeapp-e5930",
+    "storage_bucket": "coffeeapp-e5930.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235949472302:android:001d7e0aec54d3851a7dbf",
+        "android_client_info": {
+          "package_name": "com.alpermelkeli.coffeeshopcompose"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvRJy9XIBXZhb9bR3yt8WxeuK08x7gVqc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
