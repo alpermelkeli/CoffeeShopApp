@@ -43,40 +43,50 @@ import com.alpermelkeli.coffeeshopcompose.viewmodel.UserViewModel
 
 
 @Composable
-fun HomeScreenComposable(navController: NavHostController, coffeeViewModel: CoffeeViewModel, userViewModel: UserViewModel) {
+fun HomeScreenComposable(
+    navController: NavHostController,
+    coffeeViewModel: CoffeeViewModel,
+    userViewModel: UserViewModel
+) {
     LaunchedEffect(Unit) {
         userViewModel.getFavourites()
         coffeeViewModel.fetchAllCoffees()
     }
     val userFavourites by userViewModel.userFavourites.observeAsState(emptyList())
     val coffeeListState by coffeeViewModel.allCoffees.observeAsState(emptyList())
+    val filteredCoffeeList = remember { mutableStateOf(coffeeListState) }
     val scrollState = rememberLazyListState()
     val offset by remember {
         derivedStateOf { (scrollState.firstVisibleItemScrollOffset / 200f).coerceIn(0f, 1f) } // Normalize offset (0-1)
     }
-    val coffeeTypes = listOf("All Coffees","Espresso", "Latte", "Cappuccino", "Mocha")
-    val selectedCoffeeType = remember{ mutableStateOf("All Coffees") }
-    val selectedMenuTabIndex = remember{ mutableIntStateOf(0) }
+    val coffeeTypes = listOf("All Coffees", "Espresso", "Latte", "Cappuccino", "Mocha")
+    val selectedCoffeeType = remember { mutableStateOf("All Coffees") }
+    val selectedMenuTabIndex = remember { mutableIntStateOf(0) }
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = Color(0xFFEAEAEA),
     ) {
         Box {
-
-
-            LazyColumn(horizontalAlignment = Alignment.CenterHorizontally,
+            LazyColumn(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 state = scrollState,
                 modifier = Modifier.background(
-                    brush =  Brush.linearGradient(0.3f to Brown50,
-                        0.4f to White50)
+                    brush = Brush.linearGradient(0.3f to Brown50, 0.4f to White50)
                 )
-            )
-            {
-
-                item{
-
-
-                    SearchBarWithFilter(Black90.copy(alpha = 1f-offset), true)
+            ) {
+                item {
+                    SearchBarWithFilter(
+                        backgroundColor = Black90.copy(alpha = 1f - offset),
+                        hasBackground = true
+                    ) { query ->
+                        filteredCoffeeList.value = if (query.isEmpty()) {
+                            coffeeListState
+                        } else {
+                            coffeeListState.filter {
+                                it.name.contains(query, ignoreCase = true)
+                            }
+                        }
+                    }
 
                     Advertisement(
                         id = R.drawable.advertisement,
@@ -89,54 +99,43 @@ fun HomeScreenComposable(navController: NavHostController, coffeeViewModel: Coff
 
                     Spacer(modifier = Modifier.height(15.dp))
 
-                    HorizontalCoffeeTypeMenu(selectedTabIndex = selectedMenuTabIndex,
-                        coffeeTypes = coffeeTypes) {
+                    HorizontalCoffeeTypeMenu(
+                        selectedTabIndex = selectedMenuTabIndex,
+                        coffeeTypes = coffeeTypes
+                    ) {
                         selectedCoffeeType.value = it
                     }
 
                     Spacer(modifier = Modifier.height(15.dp))
-
                 }
 
-                itemsIndexed(coffeeListState.chunked(2)) { _, rowItems ->
+                itemsIndexed(filteredCoffeeList.value.chunked(2)) { _, rowItems ->
                     Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.Center
                     ) {
                         rowItems.forEach { coffee ->
-                            if(selectedCoffeeType.value!="All Coffees"){
-                                if(coffee.type==selectedCoffeeType.value)
-                                    CoffeeMenuItem(coffee = coffee,
-                                        onClickAddFavourite = {userViewModel.addFavourite(coffee.id)},
-                                        onClickCard = { navController.navigate("details/${coffee.id}")},
-                                        isFavourite = coffee.id in userFavourites)
-
-
+                            if (selectedCoffeeType.value != "All Coffees") {
+                                if (coffee.type == selectedCoffeeType.value)
+                                    CoffeeMenuItem(
+                                        coffee = coffee,
+                                        onClickAddFavourite = { userViewModel.addFavourite(coffee.id) },
+                                        onClickCard = { navController.navigate("details/${coffee.id}") },
+                                        isFavourite = coffee.id in userFavourites
+                                    )
+                            } else {
+                                CoffeeMenuItem(
+                                    coffee = coffee,
+                                    onClickAddFavourite = { userViewModel.addFavourite(coffee.id) },
+                                    onClickCard = { navController.navigate("details/${coffee.id}") },
+                                    isFavourite = coffee.id in userFavourites
+                                )
                             }
-                            else{
-                                CoffeeMenuItem(coffee = coffee,
-                                    onClickAddFavourite = {userViewModel.addFavourite(coffee.id) },
-                                    onClickCard = { navController.navigate("details/${coffee.id}")},
-                                    isFavourite = coffee.id in userFavourites)
-                            }
-
                         }
                     }
                 }
-
             }
-            //if(offset>0.74f) SearchBarWithFilter(backgroundColor = Black90,false)
-
+            // if(offset > 0.74f) SearchBarWithFilter(backgroundColor = Black90, false)
         }
-
     }
-}
-
-
-
-
-@Preview(showBackground = true)
-@Composable
-fun Preview() {
 }
