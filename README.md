@@ -1,2 +1,5 @@
 ![image](https://github.com/alpermelkeli/ComposeBottomNavigationBar/assets/108495629/a2612763-46ed-4962-840f-c2f3121af742)
-![image](https://github.com/alpermelkeli/ComposeBottomNavigationBar/assets/108495629/6e471237-293d-4239-87b8-522e23c6bf29)
+![image](https://github.com/user-attachments/assets/67c1cd31-3753-4ac2-ba1f-3eea31f08109)
+![image](https://github.com/user-attachments/assets/559a243a-8234-4663-8ace-c2c7f058a0ef)
+![image](https://github.com/user-attachments/assets/f1b1e64f-6e0a-4680-bd1d-85f5e3efc076)
+![image](https://github.com/user-attachments/assets/6160e4c5-77e9-497d-9ed7-427fd1379054)
