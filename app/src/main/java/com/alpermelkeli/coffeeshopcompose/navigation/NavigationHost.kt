@@ -18,7 +18,7 @@ import com.alpermelkeli.coffeeshopcompose.viewmodel.UserViewModel
 fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifier, userViewModel: UserViewModel, coffeeViewModel: CoffeeViewModel) {
     NavHost(navController = navController, startDestination = HomeScreen.Home.route, modifier = modifier) {
         composable(HomeScreen.Home.route) { HomeScreenComposable(navController = navController, coffeeViewModel = coffeeViewModel, userViewModel = userViewModel) }
-        composable(HomeScreen.Favourite.route) { FavouriteScreenComposable() }
+        composable(HomeScreen.Favourite.route) { FavouriteScreenComposable(userViewModel = userViewModel, coffeeViewModel = coffeeViewModel) }
         composable(HomeScreen.ShoppingCart.route) { ShoppingCartComposable(navController = navController,userViewModel = userViewModel, coffeeViewModel= coffeeViewModel) }
         composable(HomeScreen.Settings.route) { SettingsScreenComposable() }
         composable(OtherScreens.CoffeeDetails.route) { backStackEntry ->

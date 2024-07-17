@@ -126,7 +126,6 @@ fun ShoppingCartComposable(navController: NavController,userViewModel: UserViewM
                 .fillMaxHeight(0.5f)
                 .padding(start = 15.dp, end = 15.dp)) {
                 items(userCartsState) { coffeeCardItem ->
-                    println(coffeeCardItem.coffeeId)
                     CoffeeOrderItem(
                         coffeeCardItem = coffeeCardItem,
                         onClickedIncreaseQuantity = {userViewModel.addCart(coffeeId = coffeeCardItem.coffeeId) },
